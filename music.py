@@ -96,15 +96,6 @@ def previous_music():
     l_rodando["text"] = tocando
 
 
-def plus_volume():
-    x = 0
-    if plus:
-        x += 0.1
-        mixer.music.set_volume(x)
-
-
-def minus_volume():
-    mixer.music.set_volume(0.1)
 
 
 lista = ["Melhor Dia 7 - Sossego", "Poesia Acústica 12 - Pra Sempre", "Sigo sozinho"]
@@ -173,21 +164,6 @@ stop = Button(underside, command=stop_music, width=40, height=40, image=img_7,
               bg="#2e2d2c", fg="#feffff")
 stop.place(x=268, y=35)
 
-img_8 = Image.open("icon_plus.png")
-img_8 = img_8.resize((30, 30))
-img_8 = ImageTk.PhotoImage(img_8)
-plus = Button(underside, command=plus_volume, width=40, height=40, image=img_8,
-              font="ivy 10 bold", relief=RAISED, overrelief=RIDGE,
-              bg="#2e2d2c", fg="#feffff")
-plus.place(x=340, y=35)
-
-img_9 = Image.open("icon_minus.png")
-img_9 = img_9.resize((30, 30))
-img_9 = ImageTk.PhotoImage(img_9)
-minus = Button(underside, command=minus_volume, width=40, height=40, image=img_9,
-               font="ivy 10 bold", relief=RAISED, overrelief=RIDGE,
-               bg="#2e2d2c", fg="#feffff")
-minus.place(x=387, y=35)
 
 os.chdir(r"C:\Users\Gustavo\Downloads\icons_python\musicas_python")
 musicas = os.listdir()
