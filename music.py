@@ -31,72 +31,83 @@ l_logo = Label(left, height=130, image=img_1, compound=LEFT, padx=10, anchor="nw
 l_logo.place(x=6, y=15)
 
 
-# func
+# funções
 
 def play_music():
-    run = listbox.get(ACTIVE)
-    l_run["text"] = run
-    mixer.music.load(l_run)
+    rodando = listbox.get(ACTIVE)
+    l_rodando["text"] = rodando
+    mixer.music.load(rodando)
     mixer.music.play()
 
 
 def pause_music():
-    phrase = ["Música pausada..."]
-    for f in phrase:
-        l_run["text"] = f
+    frase = ["Música pausada..."]
+    for f in frase:
+        l_rodando["text"] = f
         mixer.music.pause()
 
 
 def resume_music():
-    run = listbox.get(ACTIVE)
-    l_run["text"] = run
+    rodando = listbox.get(ACTIVE)
+    l_rodando["text"] = rodando
     mixer.music.unpause()
 
 
 def stop_music():
-    run = listbox.get(ACTIVE)
-    l_run["text"] = "Música..."
-    mixer.music.load(run)
+    rodando = listbox.get(ACTIVE)
+    l_rodando["text"] = "Música..."
+    mixer.music.load(rodando)
     mixer.music.stop()
 
 
 def next_music():
-    sound = l_run["text"]
-    index = songs.index(sound)
+    tocando = l_rodando["text"]
+    index = musicas.index(tocando)
 
-    new_index = index + 1
-    playing = songs[new_index]
+    novo_index = index + 1
+    tocando = musicas[novo_index]
 
-    mixer.music.load(sound)
+    mixer.music.load(tocando)
     mixer.music.play()
 
     listbox.delete(0, END)
-    show()
+    mostrar()
 
-    listbox.select_set(new_index)
+    listbox.select_set(novo_index)
     listbox.config(selectmode=SINGLE)
-    l_run["text"] = playing
+    l_rodando["text"] = tocando
 
 
 def previous_music():
-    sound = l_run["text"]
-    index = songs.index(sound)
+    tocando = l_rodando["text"]
+    index = musicas.index(tocando)
 
-    new_index = index - 1
-    sound = songs[new_index]
+    novo_index = index - 1
+    tocando = musicas[novo_index]
 
-    mixer.music.load(sound)
+    mixer.music.load(tocando)
     mixer.music.play()
 
     listbox.delete(0, END)
-    show()
+    mostrar()
 
-    listbox.select_set(new_index)
+    listbox.select_set(novo_index)
     listbox.config(selectmode=SINGLE)
-    l_run["text"] = sound
+    l_rodando["text"] = tocando
 
 
-music = ["Melhor Dia 7 - Sossego", "Poesia Acústica 12 - Pra Sempre", "Sigo sozinho"]
+def plus_volume():
+    x = 0
+    if plus:
+        x += 0.1
+        mixer.music.set_volume(x)
+
+
+def minus_volume():
+    mixer.music.set_volume(0.1)
+
+
+lista = ["Melhor Dia 7 - Sossego", "Poesia Acústica 12 - Pra Sempre", "Sigo sozinho"]
 # Configurando o frame right
 
 listbox = Listbox(right, width=41, height=10, selectmode=SINGLE, font="arial 9 bold",
@@ -110,9 +121,9 @@ s.config(command=listbox.yview)
 
 # Configurando o frame underside
 
-l_run = Label(underside, text="Música...", width=58, justify=LEFT,
-              anchor="nw", font="ivy 10", bg="#feffff", fg="#2e2d2c")
-l_run.place(x=0, y=1)
+l_rodando = Label(underside, text="Música...", width=58, justify=LEFT,
+                  anchor="nw", font="ivy 10", bg="#feffff", fg="#2e2d2c")
+l_rodando.place(x=0, y=1)
 
 img_2 = Image.open("icon_rewind.png")
 img_2 = img_2.resize((30, 30))
@@ -162,16 +173,32 @@ stop = Button(underside, command=stop_music, width=40, height=40, image=img_7,
               bg="#2e2d2c", fg="#feffff")
 stop.place(x=268, y=35)
 
+img_8 = Image.open("icon_plus.png")
+img_8 = img_8.resize((30, 30))
+img_8 = ImageTk.PhotoImage(img_8)
+plus = Button(underside, command=plus_volume, width=40, height=40, image=img_8,
+              font="ivy 10 bold", relief=RAISED, overrelief=RIDGE,
+              bg="#2e2d2c", fg="#feffff")
+plus.place(x=340, y=35)
+
+img_9 = Image.open("icon_minus.png")
+img_9 = img_9.resize((30, 30))
+img_9 = ImageTk.PhotoImage(img_9)
+minus = Button(underside, command=minus_volume, width=40, height=40, image=img_9,
+               font="ivy 10 bold", relief=RAISED, overrelief=RIDGE,
+               bg="#2e2d2c", fg="#feffff")
+minus.place(x=387, y=35)
+
 os.chdir(r"C:\Users\Gustavo\Downloads\icons_python\musicas_python")
-songs = os.listdir()
+musicas = os.listdir()
 
 
-def show():
-    for song in songs:
-        listbox.insert(END, song)
+def mostrar():
+    for m in musicas:
+        listbox.insert(END, m)
 
 
-show()
+mostrar()
 
 mixer.init()
 
