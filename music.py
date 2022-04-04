@@ -22,7 +22,7 @@ underside.grid(row=1, column=0, columnspan=3, pady=1, padx=0, sticky=NSEW)
 
 # Configurando o frame left
 
-img_1 = Image.open("icon_spotify.png")
+img_1 = Image.open("image/icon_spotify.png")
 img_1 = img_1.resize((130, 130))
 img_1 = ImageTk.PhotoImage(img_1)
 
@@ -96,6 +96,13 @@ def previous_music():
     l_rodando["text"] = tocando
 
 
+def plus_volume():
+    if plus == plus:
+        mixer.music.set_volume(+0.2)
+
+
+def minus_volume():
+    mixer.music.set_volume(0.1)
 
 
 lista = ["Melhor Dia 7 - Sossego", "Poesia Acústica 12 - Pra Sempre", "Sigo sozinho"]
@@ -116,7 +123,7 @@ l_rodando = Label(underside, text="Música...", width=58, justify=LEFT,
                   anchor="nw", font="ivy 10", bg="#feffff", fg="#2e2d2c")
 l_rodando.place(x=0, y=1)
 
-img_2 = Image.open("icon_rewind.png")
+img_2 = Image.open("image/icon_rewind.png")
 img_2 = img_2.resize((30, 30))
 img_2 = ImageTk.PhotoImage(img_2)
 rewind = Button(underside, command=previous_music, width=40, height=40, image=img_2,
@@ -124,7 +131,7 @@ rewind = Button(underside, command=previous_music, width=40, height=40, image=im
                 bg="#2e2d2c", fg="#feffff")
 rewind.place(x=38, y=35)
 
-img_3 = Image.open("icon_play.png")
+img_3 = Image.open("image/icon_play.png")
 img_3 = img_3.resize((30, 30))
 img_3 = ImageTk.PhotoImage(img_3)
 play = Button(underside, command=play_music, width=40, height=40, image=img_3,
@@ -132,7 +139,7 @@ play = Button(underside, command=play_music, width=40, height=40, image=img_3,
               bg="#2e2d2c", fg="#feffff")
 play.place(x=84, y=35)
 
-img_4 = Image.open("icon_next.png")
+img_4 = Image.open("image/icon_next.png")
 img_4 = img_4.resize((30, 30))
 img_4 = ImageTk.PhotoImage(img_4)
 next = Button(underside, command=next_music, width=40, height=40, image=img_4,
@@ -140,7 +147,7 @@ next = Button(underside, command=next_music, width=40, height=40, image=img_4,
               bg="#2e2d2c", fg="#feffff")
 next.place(x=130, y=35)
 
-img_5 = Image.open("icon_pause.png")
+img_5 = Image.open("image/icon_pause.png")
 img_5 = img_5.resize((30, 30))
 img_5 = ImageTk.PhotoImage(img_5)
 pause = Button(underside, command=pause_music, width=40, height=40, image=img_5,
@@ -148,7 +155,7 @@ pause = Button(underside, command=pause_music, width=40, height=40, image=img_5,
                bg="#2e2d2c", fg="#feffff")
 pause.place(x=176, y=35)
 
-img_6 = Image.open("icon_resume.png")
+img_6 = Image.open("image/icon_resume.png")
 img_6 = img_6.resize((30, 30))
 img_6 = ImageTk.PhotoImage(img_6)
 resume = Button(underside, command=resume_music, width=40, height=40, image=img_6,
@@ -156,7 +163,7 @@ resume = Button(underside, command=resume_music, width=40, height=40, image=img_
                 bg="#2e2d2c", fg="#feffff")
 resume.place(x=222, y=35)
 
-img_7 = Image.open("icon_stop.png")
+img_7 = Image.open("image/icon_stop.png")
 img_7 = img_7.resize((30, 30))
 img_7 = ImageTk.PhotoImage(img_7)
 stop = Button(underside, command=stop_music, width=40, height=40, image=img_7,
@@ -164,8 +171,23 @@ stop = Button(underside, command=stop_music, width=40, height=40, image=img_7,
               bg="#2e2d2c", fg="#feffff")
 stop.place(x=268, y=35)
 
+img_8 = Image.open("image/icon_plus.png")
+img_8 = img_8.resize((30, 30))
+img_8 = ImageTk.PhotoImage(img_8)
+plus = Button(underside, command=plus_volume, width=40, height=40, image=img_8,
+              font="ivy 10 bold", relief=RAISED, overrelief=RIDGE,
+              bg="#2e2d2c", fg="#feffff")
+plus.place(x=340, y=35)
 
-os.chdir(r"C:\Users\Gustavo\Downloads\icons_python\musicas_python")
+img_9 = Image.open("image/icon_minus.png")
+img_9 = img_9.resize((30, 30))
+img_9 = ImageTk.PhotoImage(img_9)
+minus = Button(underside, command=minus_volume, width=40, height=40, image=img_9,
+               font="ivy 10 bold", relief=RAISED, overrelief=RIDGE,
+               bg="#2e2d2c", fg="#feffff")
+minus.place(x=387, y=35)
+
+os.chdir(r"C:\Users\Gustavo\Downloads\musicas_python")
 musicas = os.listdir()
 
 
